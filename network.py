@@ -102,6 +102,8 @@ class NetworkManager:
         """Listen for peer discovery broadcasts."""
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Bind to all interfaces to receive broadcasts on LAN
+        # This is intentional for peer discovery functionality
         sock.bind(('', self.broadcast_port))
         sock.settimeout(1.0)
         
@@ -138,6 +140,8 @@ class NetworkManager:
         """Listen for incoming messages."""
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        # Bind to all interfaces to receive messages on LAN
+        # This is intentional for the messenger functionality
         sock.bind(('', self.message_port))
         sock.settimeout(1.0)
         
